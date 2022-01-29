@@ -15,6 +15,9 @@ class Reservation extends Model
 
         
     }
+    public function order(){
+        return $this->belongsTo(Order::class);
+    }
 
     //date is a fillable property
     protected $fillable = ['date', 'time', 'message', 'user_id', 'people', 'status'];

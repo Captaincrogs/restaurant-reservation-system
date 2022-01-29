@@ -36,4 +36,5 @@ Route::get('/order', [App\Http\Controllers\OrderController::class, 'index'])->na
 Route::get('/reservations', [App\Http\Controllers\ReservationController::class, 'index'])->name('reservation');
 Route::post('/reservations/store', [App\Http\Controllers\ReservationController::class, 'store']);
 Route::post('/reservations/destroy', [App\Http\Controllers\ReservationController::class, 'destroy']);
+Route::post('/reservations/update', [App\Http\Controllers\ReservationController::class, 'update']);
 

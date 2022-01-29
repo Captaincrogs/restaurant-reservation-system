@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreReservationRequest;
 use App\Http\Requests\UpdateReservationRequest;
 use App\Models\Reservation;
+use Illuminate\Http\Request;
 use App\Models\User;
 
 
@@ -61,7 +62,16 @@ class ReservationController extends Controller
         return redirect()->route('reservation');
     }
 
-
+    public function update(Request $request)
+    {
+        //if button attended is clicked change status to attended
+        {
+            $reservation = Reservation::find(request('id'));
+            $reservation->status = 'attended';
+            $reservation->save();
+            return redirect()->route('reservation');
+        }
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -69,12 +79,14 @@ class ReservationController extends Controller
      * @param  \App\Models\Reservation  $reservation
      * @return \Illuminate\Http\Response
      */
-    public function destroy($request)
+    public function destroy(Request $request)
     {
+        //delete the selected reservation
         $reservation = Reservation::find($request->id);
         $reservation->delete();
         return redirect()->route('reservation');
 
+    
 
     }
 }

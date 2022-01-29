@@ -36,10 +36,13 @@ class Order extends Model
             ->selectRaw('user_id, product_id, COUNT(*) as product_count')
             ->get();
 
+
             return $orders;
 
     //    return Order::query()->where('user_id', $this->product_id)->count();
 
-
     }
+//join the orders table with the reservations table
+
+
     }

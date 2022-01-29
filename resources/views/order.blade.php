@@ -49,7 +49,6 @@
         <h1>Add new products for clients</h1>
         
         <p> </p><p> </p>
-        
             <div class="col-md-10 col-md-offset-1">
     
                 <div class="panel panel-default panel-table">
@@ -79,6 +78,10 @@
                       </thead>
                       <tbody>
                         @foreach($orders as $order)
+                        {{-- only show if reservation has status attended --}}
+                        @if($order->status == 'attended')
+        
+
 
                               <tr>
                                 <td align="center">
@@ -86,9 +89,7 @@
                                     @csrf
                                   <input type="hidden" name="id" value="{{$order->id}}">
                                   <input type="submit" value="Delete" class="btn btn-danger">
-
                                 </td>
-
                                 {{-- <td class="hidden-xs"></td> --}}
                                 <td>{{$order->id}}</td>
                                 <td>{{$order->user->name}}</td>
@@ -98,9 +99,11 @@
                                 {{-- count the same  --}}
                                 <td>{{$order->product->category}}</td>
                                 <td>{{$order->product_count}}</td>
-
                               </tr>
-                                @endforeach                                  
+                              @else
+                              <h1>no attended reservation no orders can be placed</h1>
+                              @endif
+                              @endforeach
                               </form>
 
                             </tbody>
@@ -148,7 +151,7 @@
             <div class="form-group">
               <br>
               <select class="form-control form-control-lg" name="order_id" id="validationCustom03" required>
-                @foreach ($order as $p)
+                @foreach ($orders as $p)
                 <option value="">
                   
                     

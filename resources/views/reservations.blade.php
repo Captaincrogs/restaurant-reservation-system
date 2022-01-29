@@ -63,7 +63,7 @@
                       <thead>
                         <tr>
                             <th><em class="fa fa-cog"></em></th>
-                            <th class="hidden-xs">ID</th>
+                            <th class="hidden-xs">people</th>
                             <th>Name</th>
                             <th>user_message</th>
                             <th>date</th>
@@ -73,29 +73,48 @@
                       </thead>
                       <tbody>
                         @foreach($reservations as $reservation)
-
                               <tr>
                                 <td align="center">
                                   <form action="reservations/destroy" enctype="multipart/form-data" method="post">
                                     @csrf
-                                  <input type="hidden" name="id" value="{{$reservation->id}}">
-                                  <input type="submit" name="destroy" value="Delete" class="btn btn-danger">
-                                </td>
+                                    
 
+                                  <input type="hidden" name="id" value="{{$reservation->id}}">
+                                  <input type="submit" onclick="return confirm('Are you sure?')" name="Destroy" value="delete" class="btn btn-danger">
+                                  </form>
+                                  <form action="reservations/update" enctype="multipart/form-data" method="post">
+                                    @csrf
+                                  <input type="hidden" name="id" value="{{$reservation->id}}">
+                                  <input type="submit" name="attended" value="attended?" class="btn btn-info">
+                                  </form>
+
+                                </td>
                                 {{-- <td class="hidden-xs"></td> --}}
-                                <td>{{$reservation->id}}</td>
+                                <td>{{$reservation->people}}</td>
                                 <td>{{$reservation->user->name}}</td>
                                 <td>{{$reservation->message}}</td>
                                 <td>{{$reservation->date}}</td>
                                 <td>{{$reservation->time}}</td>
-                                <td>{{$reservation->status}}</td>
+                                <td>
+                                  @if($reservation->status == 'attended')
+                                    <button type="button" class="btn btn-success">{{$reservation->status}}</button>
+                                  @else
+                                    <button type="button" class="btn btn-danger">{{$reservation->status}}</button>
+                                  @endif
                               </tr>
                              </form>
                              @endforeach
-
                             </tbody>
                     </table>
+             
                 
+
+
+              
+
+
+
+
                   </div>
                   <div class="panel-footer">
                     <div class="row">
@@ -164,3 +183,5 @@
 	</div>
 </div>
 </body>
+
+
