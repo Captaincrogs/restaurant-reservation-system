@@ -64,7 +64,6 @@ class ReservationController extends Controller
 
     public function update(Request $request)
     {
-        //if button attended is clicked change status to attended
         {
             $reservation = Reservation::find(request('id'));
             $reservation->status = 'attended';

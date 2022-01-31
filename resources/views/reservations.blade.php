@@ -37,9 +37,7 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <!------ Include the above in your HEAD tag ---------->
-    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
-    
     <div class="container">
         <div class="row">
         <p></p>
@@ -77,8 +75,6 @@
                                 <td align="center">
                                   <form action="reservations/destroy" enctype="multipart/form-data" method="post">
                                     @csrf
-                                    
-
                                   <input type="hidden" name="id" value="{{$reservation->id}}">
                                   <input type="submit" onclick="return confirm('Are you sure?')" name="Destroy" value="delete" class="btn btn-danger">
                                   </form>
@@ -87,7 +83,6 @@
                                   <input type="hidden" name="id" value="{{$reservation->id}}">
                                   <input type="submit" name="attended" value="attended?" class="btn btn-info">
                                   </form>
-
                                 </td>
                                 {{-- <td class="hidden-xs"></td> --}}
                                 <td>{{$reservation->people}}</td>
@@ -106,15 +101,6 @@
                              @endforeach
                             </tbody>
                     </table>
-             
-                
-
-
-              
-
-
-
-
                   </div>
                   <div class="panel-footer">
                     <div class="row">
@@ -136,10 +122,7 @@
                     </div>
                   </div>
                 </div>
-    
     </div></div></div>
-
-
 <div class="container">
 	<div class="row">
       <div class="col-md-6 col-md-offset-3">
@@ -164,14 +147,11 @@
             <div class="form-group">
               <label for="product_quantity">Select client</label> 
               <select name="user_id" class="form-control">
-
                 @foreach ($users as $user)
                 <option value="{{$user->id}}">{{$user->name}}</option>
-                
                 @endforeach
-
               </select>
-                </option>
+            </option>
               </fieldset>
           <div class="py-3 pb-4 border-bottom"> 
             <button class="btn btn-primary mr-3" type="submit">Save Changes</button> 

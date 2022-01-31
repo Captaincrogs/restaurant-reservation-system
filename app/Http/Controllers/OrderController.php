@@ -19,13 +19,29 @@ class OrderController extends Controller
     public function index()
     {            
 
-$reservations = Reservation::where('status', 'attended')->get();
+
+        $orders = Order::select('user_id', 'product_id')
+        ->groupBy('user_id', 'product_id')
+        ->havingRaw('COUNT(*) > 0')
+        ->selectRaw('user_id, product_id, COUNT(*) as product_count')
+        ->get();
+
+        //get all reservations status attended and link with orders table
+        $reservations = Reservation::where('status', 'attended')->get();
+
+        
+
+        return view('order', compact('orders', 'reservations'));
+
+    
 
 
-$order_class = new Order();
-$orders = $order_class->getDuplicateOrders();
+//make a relation between the order and the reservation and get the status of the reservation
 
-return view('order', compact('orders', 'reservations')); 
+
+
+
+
 
 // echo '<table border="1">';
 // echo '<tr><th>User</th><th>Product</th><th>Quantity</th></tr>';

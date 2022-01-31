@@ -20,12 +20,14 @@ class OrderSeeder extends Seeder
             'email' => 'Jhon@doe.com',
             'user_id' => 1,
             'product_id' => 1,
+            'reservation_id' => 1,
         ],
         [
             'name' => 'John Doe',
             'email' => 'Jhon@doe.com',
             'user_id' => 1,
             'product_id' => 1,
+            'reservation_id' => 1,
         ],
         [
 
@@ -33,6 +35,7 @@ class OrderSeeder extends Seeder
             'email' => 'stroopwafel@koeki.com',
             'user_id' => 2,
             'product_id' => 2,
+            'reservation_id' => 2,
         ],
         [
     
@@ -40,6 +43,7 @@ class OrderSeeder extends Seeder
             'email' =>  'stroopwafel@koeki.com',
             'user_id' => 2,
             'product_id' => 2,
+            'reservation_id' => 2,
         ],
                 ]);
 

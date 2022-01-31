@@ -78,11 +78,9 @@
                       </thead>
                       <tbody>
                         @foreach($orders as $order)
-                        {{-- only show if reservation has status attended --}}
-                        @if($order->status == 'attended')
-        
-
-
+                        @foreach ($reservations as $reservation )
+                        {{-- //if reservation status is attended show with reservation--}}
+                        @if($reservation->status == 'attended')                        
                               <tr>
                                 <td align="center">
                                   <form action="order/remove" enctype="multipart/form-data" method="post">
@@ -99,11 +97,13 @@
                                 {{-- count the same  --}}
                                 <td>{{$order->product->category}}</td>
                                 <td>{{$order->product_count}}</td>
+                                {{dd($order->product->id)}}
+
                               </tr>
-                              @else
-                              <h1>no attended reservation no orders can be placed</h1>
-                              @endif
-                              @endforeach
+                              <h1>No attended reservations no orders can be placed</h1>
+                          @endif
+                          @endforeach
+                          @endforeach
                               </form>
 
                             </tbody>
@@ -142,22 +142,26 @@
             @csrf
           <fieldset>
             <legend class="text-center">Add new order</legend>
-    
-           
-            <div class="col-md-6"> <label for="order_name">order name</label> <input type="text" name="order_name" class="bg-light form-control" placeholder="order name"> </div>
-            <div class="col-md-6"> <label for="order_price">Price</label> <input type="number" name="order_price" class="bg-light form-control" placeholder="Price"> </div>
-            <div class="col-md-6"> <label for="order_quantity">Quantity</label> <input type="number" name="order_quantity" class="bg-light form-control" placeholder="qty"> </div>
+
+            <div class="col-md-6"> 
+              <label for="order_name">Attending Clients</label> <input type="text" name="order_name" class="bg-light form-control" placeholder="attending clients">
+             </div>
+            <div class="col-md-6">
+               <label for="order_price">Product</label> <input type="number" name="order_price" class="bg-light form-control" placeholder="Price">
+              </div>
+            <div class="col-md-6">
+               <label for="order_quantity">Quantity</label>
+                <input type="number" name="order_quantity" class="bg-light form-control" placeholder="qty">
+               </div>
+              
+                <div class="col-md-6">
+                  <label for="order_quantity">Price</label>
+                   <input type="number" name="order_quantity" class="bg-light form-control" placeholder="qty">
+                  </div>
+                 
             <div class="col-md-6 pt-md-0 pt-3">
             <div class="form-group">
-              <br>
-              <select class="form-control form-control-lg" name="order_id" id="validationCustom03" required>
-                @foreach ($orders as $p)
-                <option value="">
-                  
-                    
-                </option>
-                @endforeach
-                </select>
+              
           </fieldset>
           <div class="py-3 pb-4 border-bottom"> 
             <button class="btn btn-primary mr-3" type="submit">Save Changes</button> 

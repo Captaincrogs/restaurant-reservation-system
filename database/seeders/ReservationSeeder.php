@@ -23,7 +23,6 @@ class ReservationSeeder extends Seeder
             'time' => '12:00',
             'people' => '2',
             'status' => 'pending',
-
         ]);
     
     }

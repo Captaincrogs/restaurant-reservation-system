@@ -20,6 +20,7 @@ class CreateOrdersTable extends Migration
             $table->string('name');
             $table->unsignedInteger('product_id');   
             $table->unsignedInteger('user_id');
+            $table->unsignedInteger('reservation_id');
         });
     }
 

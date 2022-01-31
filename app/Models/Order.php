@@ -29,20 +29,30 @@ class Order extends Model
     public function getDuplicateOrders()
     {
 
-        // count the number of same orders for each user
-        $orders = Order::select('user_id', 'product_id')
-            ->groupBy('user_id', 'product_id')
-            ->havingRaw('COUNT(*) > 0')
-            ->selectRaw('user_id, product_id, COUNT(*) as product_count')
-            ->get();
+        // $orders = Order::select('user_id', 'product_id')
+        //     ->groupBy('user_id', 'product_id')
+        //     ->havingRaw('COUNT(*) > 0')
+        //     ->selectRaw('user_id, product_id, COUNT(*) as product_count')
+        //     ->get();
 
+            
 
+        // dd($reservations);
+         
+            
+
+            // return the orders
+            
             return $orders;
 
     //    return Order::query()->where('user_id', $this->product_id)->count();
 
     }
-//join the orders table with the reservations table
+
+    public function reservations()
+    {
+        return $this->belongsTo(Reservation::class);
+    }
 
 
     }
