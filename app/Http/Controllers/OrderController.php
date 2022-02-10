@@ -26,12 +26,11 @@ class OrderController extends Controller
         ->selectRaw('user_id, product_id, COUNT(*) as product_count')
         ->get();
 
-        //get all reservations status attended and link with orders table
-        $reservations = Reservation::where('status', 'attended')->get();
+    $reservations = Reservation::where('status', 'attended')->get();
 
         
 
-        return view('order', compact('orders', 'reservations'));
+    return view('order', compact('orders', 'reservations'));
 
     
 

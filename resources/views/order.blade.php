@@ -69,7 +69,7 @@
                             <th><em class="fa fa-cog"></em></th>
                             <th class="hidden-xs">ID</th>
                             <th>Client name</th>
-                            <th>Name</th>
+                            <th>Product name</th>
                             <th>Decription</th>
                             <th>Price</th>
                             <th>category</th>
@@ -77,31 +77,37 @@
                         </tr> 
                       </thead>
                       <tbody>
-                        @foreach($orders as $order)
                         @foreach ($reservations as $reservation )
+
+
+                  
                         {{-- //if reservation status is attended show with reservation--}}
-                        @if($reservation->status == 'attended')                        
                               <tr>
                                 <td align="center">
                                   <form action="order/remove" enctype="multipart/form-data" method="post">
                                     @csrf
-                                  <input type="hidden" name="id" value="{{$order->id}}">
+                                  <input type="hidden" name="id" value="{{$reservation->id}}">
                                   <input type="submit" value="Delete" class="btn btn-danger">
                                 </td>
+                          
                                 {{-- <td class="hidden-xs"></td> --}}
-                                <td>{{$order->id}}</td>
-                                <td>{{$order->user->name}}</td>
+                                <td>{{$reservation->id}}</td>
+                                <td>{{$reservation->user->name}}</td>
+                                @foreach ($orders as $order )
+
                                 <td>{{$order->product->name}}</td>
                                 <td>{{$order->product->description}}</td>
                                 <td>{{$order->product->price}}</td>
-                                {{-- count the same  --}}
-                                <td>{{$order->product->category}}</td>
-                                <td>{{$order->product_count}}</td>
-                                {{dd($order->product->id)}}
+                                <div class="form-group">
+                                  <label for="product_quantity">Select client</label> 
+                                  <select name="user_id" class="form-control">
+                                    <option value="{{$reservation->id}}">{{$reservation->user->name}}</option>
+                                  </select>
+                                </option>
+                               
 
                               </tr>
                               <h1>No attended reservations no orders can be placed</h1>
-                          @endif
                           @endforeach
                           @endforeach
                               </form>
@@ -144,7 +150,9 @@
             <legend class="text-center">Add new order</legend>
 
             <div class="col-md-6"> 
-              <label for="order_name">Attending Clients</label> <input type="text" name="order_name" class="bg-light form-control" placeholder="attending clients">
+              @foreach ($reservations as $reservation)
+              <label for="order_name">{{$reservation->user->name}}</label> <input type="text" name="order_name" class="bg-light form-control" placeholder="attending clients">
+              @endforeach
              </div>
             <div class="col-md-6">
                <label for="order_price">Product</label> <input type="number" name="order_price" class="bg-light form-control" placeholder="Price">

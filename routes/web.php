@@ -30,11 +30,18 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::group(['middleware' => ['auth']], function () {
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/products', [App\Http\Controllers\ProductController::class, 'index'])->name('products');
+Route::post('/products/update', [App\Http\Controllers\ProductController::class, 'update'])->name('update'); 
+Route::post('/products/remove', [App\Http\Controllers\ProductController::class, 'remove'])->name('remove');
 Route::get('/order', [App\Http\Controllers\OrderController::class, 'index'])->name('order');
 Route::get('/reservations', [App\Http\Controllers\ReservationController::class, 'index'])->name('reservation');
 Route::post('/reservations/store', [App\Http\Controllers\ReservationController::class, 'store']);
 Route::post('/reservations/destroy', [App\Http\Controllers\ReservationController::class, 'destroy']);
 Route::post('/reservations/update', [App\Http\Controllers\ReservationController::class, 'update']);
+});
 
+//protect all routes
+    

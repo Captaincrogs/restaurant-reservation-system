@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
+use Illuminate\Http\Request;
+
 
 class ProductController extends Controller
 {
@@ -18,6 +20,32 @@ class ProductController extends Controller
         $products = Product::all();
 
         return view('products', compact('products'));
+    }
+
+    public function remove(Request $request){
+        $products = Product::find($request->id);
+        $products->delete();
+
+        return redirect('/products');
+    }
+
+      /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\UpdateProductRequest  $request
+     * @param  \App\Models\Product  $product
+     * @return \Illuminate\Http\Response
+     */
+    public function update(UpdateProductRequest $request, Product $product)
+    {
+        $products = Product::where('id', $request->id)->insert([
+            'name' => $request->name,
+            'price' => $request->price,
+            'category' => $request->category,
+            'description' => $request->description,
+            'created_at' => now(),
+        ]);
+        return redirect('/products');
     }
 
     /**
@@ -63,17 +91,7 @@ class ProductController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateProductRequest  $request
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateProductRequest $request, Product $product)
-    {
-        //
-    }
+  
 
     /**
      * Remove the specified resource from storage.
@@ -83,6 +101,5 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
     }
 }

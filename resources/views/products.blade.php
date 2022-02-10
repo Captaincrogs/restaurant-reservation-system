@@ -61,7 +61,6 @@
                         <h3 class="panel-title">Products</h3>
                       </div>
                       <div class="col col-xs-6 text-right">
-                        <button type="button" class="btn btn-sm btn-primary btn-create">Insert new product</button>
                       </div>
                     </div>
                   </div>
@@ -72,30 +71,25 @@
                             <th><em class="fa fa-cog"></em></th>
                             <th class="hidden-xs">ID</th>
                             <th>Name</th>
-                            <th>Updated_at</th>
+                            <th>added at</th>
                             <th>Price</th>
-                            <th>quantity</th>
                             <th>category</th>
                         </tr> 
                       </thead>
                       <tbody>
                         @foreach($products as $product)
-
+                        @csrf
                               <tr>
                                 <td align="center">
                                   <form action="products/remove" enctype="multipart/form-data" method="post">
-                                    @csrf
-                                  <input type="hidden" name="id" value="{{$product->id}}">
-                                  <input type="submit" value="Delete" class="btn btn-danger">
-
+                                  <input type="hidden" name="id" value="{{$product->id}}">              
+                                  <button type="submit" class="btn btn-danger"><em class="fa fa-trash"></em></button>
                                 </td>
-
                                 {{-- <td class="hidden-xs"></td> --}}
                                 <td>{{$product->id}}</td>
                                 <td>{{$product->name}}</td>
-                                <td>{{$product->updated_at}}</td>
-                                <td>{{$product->price}}</td>
-                                <td>{{$product->quantity}}</td>
+                                <td>{{$product->created_at}}</td>
+                                <td>€{{$product->price}}</td>
                                 <td>{{$product->category}}</td>
                               </tr>
                                 @endforeach                                  
@@ -133,32 +127,32 @@
 	<div class="row">
       <div class="col-md-6 col-md-offset-3">
         <div class="well well-sm">
-          <form action="products/add" enctype="multipart/form-data" method="post">
-            @csrf
+          <form action="products/update" enctype="multipart/form-data" method="post">
+        @csrf
           <fieldset>
             <legend class="text-center">Add new products</legend>
-    
-           
-            <div class="col-md-6"> <label for="product_name">Product name</label> <input type="text" name="product_name" class="bg-light form-control" placeholder="product name"> </div>
-            <div class="col-md-6"> <label for="product_price">Price</label> <input type="number" name="product_price" class="bg-light form-control" placeholder="Price"> </div>
-            <div class="col-md-6"> <label for="product_quantity">Quantity</label> <input type="number" name="product_quantity" class="bg-light form-control" placeholder="qty"> </div>
+            <div class="col-md-6"> <label for="product_name">Product name</label> <input type="text" name="name" class="bg-light form-control" placeholder="product name"> </div>
+            <div class="col-md-6"> <label for="product_price">Price</label> <input type="number" min="0.00" max="10000.00" step="0.01" name="price" class="bg-light form-control" placeholder="Price"> </div>
+            <div class="col-md-6"> <label for="description">description</label> <input type="text" name="description" class="bg-light form-control" placeholder="description"> </div>
+            <input type="hidden" name="id" value="{{$product->id}}">
             <div class="col-md-6 pt-md-0 pt-3">
             <div class="form-group">
               <br>
-              <select class="form-control form-control-lg" name="product_id" id="validationCustom03" required>
-                @foreach ($products as $p)
-                <option value="">
-                  {{$p->category}}
-                    
+              <select class="form-control form-control-lg" name="category" id="validationCustom03" required>
+                <option value="meal">
+                    meal
                 </option>
-                @endforeach
-                </select>
+                <option value="drink">
+                    drink
+                </option>
+                <option value="dessert">
+                    dessert
+                </option>
+              </select>
           </fieldset>
           <div class="py-3 pb-4 border-bottom"> 
             <button class="btn btn-primary mr-3" type="submit">Save Changes</button> 
         </form>
-          </form>
-          
         </div>
       </div>
 	</div>
