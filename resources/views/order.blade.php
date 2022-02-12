@@ -68,71 +68,49 @@
                         <tr>
                             <th><em class="fa fa-cog"></em></th>
                             <th class="hidden-xs">ID</th>
-                            <th>Client name</th>
-                            <th>Product name</th>
+                            <th>Client</th>
+                            <th>Product</th>
                             <th>Decription</th>
                             <th>Price</th>
                             <th>category</th>
-                            <th>quantity</th>
+                            <th>total dishes</th>
                         </tr> 
                       </thead>
                       <tbody>
                         @foreach ($reservations as $reservation )
-
-
-                  
-                        {{-- //if reservation status is attended show with reservation--}}
-                              <tr>
-                                <td align="center">
-                                  <form action="order/remove" enctype="multipart/form-data" method="post">
-                                    @csrf
-                                  <input type="hidden" name="id" value="{{$reservation->id}}">
-                                  <input type="submit" value="Delete" class="btn btn-danger">
-                                </td>
-                          
-                                {{-- <td class="hidden-xs"></td> --}}
-                                <td>{{$reservation->id}}</td>
-                                <td>{{$reservation->user->name}}</td>
-                                @foreach ($orders as $order )
-
-                                <td>{{$order->product->name}}</td>
-                                <td>{{$order->product->description}}</td>
-                                <td>{{$order->product->price}}</td>
-                                <div class="form-group">
-                                  <label for="product_quantity">Select client</label> 
-                                  <select name="user_id" class="form-control">
-                                    <option value="{{$reservation->id}}">{{$reservation->user->name}}</option>
-                                  </select>
-                                </option>
-                               
-
-                              </tr>
-                              <h1>No attended reservations no orders can be placed</h1>
-                          @endforeach
-                          @endforeach
+                        @if ($reservation->status == 'attended')
+                        @foreach ($orders as $order )
+                          <tr>
+                            <td align="center">
+                              <form action="order/remove" enctype="multipart/form-data" method="post">
+                                @csrf
+                              <input type="hidden" name="id" value="{{$reservation->id}}">
+                              <input type="submit" value="Delete" class="btn btn-danger">
+                            </td>
+                            <td>{{$reservation->id}}</td>
+                            <td>{{$reservation->user->name}}</td>
+                            <td>{{$order->product->name}}</td>
+                            <td>{{$order->product->description}}</td>
+                            <td>€{{$order->product->price}}</td>
+                            <td>{{$order->product->category}}</td>
+                            <td>{{$order->product_count}}</td>
+                          </tr>
+                            <div class="form-group">
+                      @endforeach
+                      @elseif ($reservation->status == 'pending')
+                      <h1>No attended reservations no orders can be placed</h1>
+                      @endif
+                      @endforeach
                               </form>
-
                             </tbody>
                     </table>
                 
                   </div>
                   <div class="panel-footer">
                     <div class="row">
-                      <div class="col col-xs-4">Page 1 of 5
+                      <div class="col col-xs-4">Page 1
                       </div>
-                      <div class="col col-xs-8">
-                        <ul class="pagination hidden-xs pull-right">
-                          <li><a href="#">1</a></li>
-                          <li><a href="#">2</a></li>
-                          <li><a href="#">3</a></li>
-                          <li><a href="#">4</a></li>
-                          <li><a href="#">5</a></li>
-                        </ul>
-                        <ul class="pagination visible-xs pull-right">
-                            <li><a href="#">«</a></li>
-                            <li><a href="#">»</a></li>
-                        </ul>
-                      </div>
+                    
                     </div>
                   </div>
                 </div>
@@ -144,35 +122,45 @@
 	<div class="row">
       <div class="col-md-6 col-md-offset-3">
         <div class="well well-sm">
-          <form action="order/add" enctype="multipart/form-data" method="post">
+          <form action="order/neworder" enctype="multipart/form-data" method="post">
             @csrf
           <fieldset>
             <legend class="text-center">Add new order</legend>
 
             <div class="col-md-6"> 
-              @foreach ($reservations as $reservation)
-              <label for="order_name">{{$reservation->user->name}}</label> <input type="text" name="order_name" class="bg-light form-control" placeholder="attending clients">
+              <label for="order_name">attending client</label> 
+              <select name="user_id" class="form-control">
+                @foreach ($reservations as $reservation )
+                <option value="{{$reservation->id}}">{{$reservation->user->name}}</option>
               @endforeach
+              </select>
+            </option>
              </div>
             <div class="col-md-6">
-               <label for="order_price">Product</label> <input type="number" name="order_price" class="bg-light form-control" placeholder="Price">
-              </div>
+               <label for="order_price">Product</label>
+               <select name="user_id" class="form-control">
+                @foreach ($products as $product )
+                <option value="products">{{$product->name}}</option>
+              @endforeach
+              </select>
+            </option>
+            </div>
             <div class="col-md-6">
                <label for="order_quantity">Quantity</label>
                 <input type="number" name="order_quantity" class="bg-light form-control" placeholder="qty">
                </div>
               
                 <div class="col-md-6">
-                  <label for="order_quantity">Price</label>
-                   <input type="number" name="order_quantity" class="bg-light form-control" placeholder="qty">
+                  <div class="border-bottom"> 
+                    <br>
+                    <button class="btn btn-primary" type="submit">Save Changes</button> 
                   </div>
                  
             <div class="col-md-6 pt-md-0 pt-3">
             <div class="form-group">
               
           </fieldset>
-          <div class="py-3 pb-4 border-bottom"> 
-            <button class="btn btn-primary mr-3" type="submit">Save Changes</button> 
+         
         </form>
           </form>
           

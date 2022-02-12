@@ -22,6 +22,7 @@ class ProductSeeder extends Seeder
             'category' => 'dessert',
             'price' => '1.20',   
             'created_at' => now(),
+            'updated_at' => now(),
         ],  
         [
             'id' => 2,
@@ -30,6 +31,7 @@ class ProductSeeder extends Seeder
             'category' => 'dessert',
             'price' => '1.50',
             'created_at' => now(),
+            'updated_at' => now(),
         ],
         [
             'id' => 3,
@@ -38,6 +40,7 @@ class ProductSeeder extends Seeder
             'category' => 'meal',
             'price' => '10.00',
             'created_at' => now(),
+            'updated_at' => now(),
         ],
         [   
             'id' => 4,
@@ -46,6 +49,7 @@ class ProductSeeder extends Seeder
             'category' => 'meal',
             'price' => '5.00',
             'created_at' => now(),
+            'updated_at' => now(),
         ],
         [
             'id' => 5,
@@ -54,6 +58,7 @@ class ProductSeeder extends Seeder
             'category' => 'meal',
             'price' => '7.00',
             'created_at' => now(),
+            'updated_at' => now(),
         ],
         [
             'id' => 6,
@@ -62,6 +67,7 @@ class ProductSeeder extends Seeder
             'category' => 'meal',
             'price' => '3.00',
             'created_at' => now(),
+            'updated_at' => now(),
         ],
         [
             'id' => 7,
@@ -70,6 +76,7 @@ class ProductSeeder extends Seeder
             'category' => 'drink',
             'price' => '1.00',
             'created_at' => now(),
+            'updated_at' => now(),
         ],
         [
             'id' => 8,
@@ -78,6 +85,7 @@ class ProductSeeder extends Seeder
             'category' => 'drink',
             'price' => '1.00',
             'created_at' => now(),
+            'updated_at' => now(),
         ],
         [
             'id' => 9,
@@ -86,6 +94,7 @@ class ProductSeeder extends Seeder
             'category' => 'drink',
             'price' => '1.00',
             'created_at' => now(),
+            'updated_at' => now(),
         ],
         [
             'id' => 10,
@@ -94,6 +103,7 @@ class ProductSeeder extends Seeder
             'category' => 'drink',
             'price' => '1.00', 
             'created_at' => now(),
+            'updated_at' => now(),
         ],
         
         ]);

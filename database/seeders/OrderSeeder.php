@@ -16,36 +16,18 @@ class OrderSeeder extends Seeder
     {
         DB::table('orders')->insert([
         [
-            'name' => 'John Doe',
-            'email' => 'Jhon@doe.com',
             'user_id' => 1,
             'product_id' => 1,
-            'reservation_id' => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
         ],
         [
-            'name' => 'John Doe',
-            'email' => 'Jhon@doe.com',
-            'user_id' => 1,
+            'user_id' => 3,
             'product_id' => 1,
-            'reservation_id' => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
         ],
-        [
-
-            'name' => 'stroopWafel',
-            'email' => 'stroopwafel@koeki.com',
-            'user_id' => 2,
-            'product_id' => 2,
-            'reservation_id' => 2,
-        ],
-        [
-    
-            'name' => 'stroopWafel',
-            'email' =>  'stroopwafel@koeki.com',
-            'user_id' => 2,
-            'product_id' => 2,
-            'reservation_id' => 2,
-        ],
-                ]);
+        ]);
 
 
     }

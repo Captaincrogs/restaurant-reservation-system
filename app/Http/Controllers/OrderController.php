@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Product;
 
 class OrderController extends Controller
 {
@@ -20,26 +21,22 @@ class OrderController extends Controller
     {            
 
 
+//calculate the total price of each specific user in orders table
         $orders = Order::select('user_id', 'product_id')
         ->groupBy('user_id', 'product_id')
         ->havingRaw('COUNT(*) > 0')
         ->selectRaw('user_id, product_id, COUNT(*) as product_count')
         ->get();
 
+        $total_price = 0;
+        foreach ($orders as $order) {
+            $total_price += $order->product_count * $order->product->price;
+        }
+
     $reservations = Reservation::where('status', 'attended')->get();
-
-        
-
-    return view('order', compact('orders', 'reservations'));
-
-    
-
-
-//make a relation between the order and the reservation and get the status of the reservation
-
-
-
-
+    $products = Product::all();
+    return view('order', compact('orders', 'reservations', 'products', 'total_price'));
+    }
 
 
 // echo '<table border="1">';
@@ -53,5 +50,23 @@ class OrderController extends Controller
 // }
 // echo '</table>';
 
-    }
+    
+
+    public function newOrder(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required',
+            'product_id' => 'required',
+            'quantity' => 'required',
+        ]);
+            for ($i = 0; $i < $request->quantity; $i++) {
+                Order::create([
+                    'user' => $request->user,
+                    'product' => $request->product,
+                    'quantity' => $request->quantity,
+
+                ]);
             }
+            return redirect()->route('order');
+    }
+    }
