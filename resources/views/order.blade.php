@@ -47,7 +47,15 @@
         <br>
         <br>
         <h1>Add new products for clients</h1>
-        
+
+        @if (\Session::has('success'))
+        <div class="alert alert-success">
+            <ul>
+                <li>{!! \Session::get('success') !!}</li>
+            </ul>
+        </div>
+    @endif
+
         <p> </p><p> </p>
             <div class="col-md-10 col-md-offset-1">
     
@@ -116,7 +124,7 @@
                 </div>
     
     </div></div></div>
-
+   
 
 <div class="container">
 	<div class="row">
@@ -128,7 +136,7 @@
             <legend class="text-center">Add new order</legend>
 
             <div class="col-md-6"> 
-              <label for="order_name">attending client</label> 
+              <label for="user">attending client</label> 
               <select name="user_id" class="form-control">
                 @foreach ($reservations as $reservation )
                 <option value="{{$reservation->id}}">{{$reservation->user->name}}</option>
@@ -137,17 +145,17 @@
             </option>
              </div>
             <div class="col-md-6">
-               <label for="order_price">Product</label>
-               <select name="user_id" class="form-control">
+               <label for="product">Product</label>
+               <select name="product_id" class="form-control">
                 @foreach ($products as $product )
-                <option value="products">{{$product->name}}</option>
+                <option value="{{$product->id}}">{{$product->name}}</option>
               @endforeach
               </select>
             </option>
             </div>
             <div class="col-md-6">
-               <label for="order_quantity">Quantity</label>
-                <input type="number" name="order_quantity" class="bg-light form-control" placeholder="qty">
+               <label for="quantity">Quantity</label>
+                <input type="number" name="quantity" class="bg-light form-control" placeholder="qty">
                </div>
               
                 <div class="col-md-6">

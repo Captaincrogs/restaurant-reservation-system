@@ -18,6 +18,7 @@ class CreateOrdersTable extends Migration
             $table->timestamps();
             $table->unsignedInteger('product_id');   
             $table->unsignedInteger('user_id');
+            $table->integer('quantity');
             // $table->unsignedInteger('reservation_id');
         });
     }

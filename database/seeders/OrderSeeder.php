@@ -20,12 +20,14 @@ class OrderSeeder extends Seeder
             'product_id' => 1,
             'created_at' => now(),
             'updated_at' => now(),
+            'quantity' => 1,
         ],
         [
             'user_id' => 3,
             'product_id' => 1,
             'created_at' => now(),
             'updated_at' => now(),
+            'quantity' => 2,
         ],
         ]);
 
